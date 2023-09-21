@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://um6l8ktv16cw"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_nogvd"]
+[ext_resource type="Texture2D" uid="uid://c232v7jnn6adk" path="res://art/PlayerModel_Right_1.png" id="2_5y4um"]
+[ext_resource type="Texture2D" uid="uid://3yjb8ixdjwjy" path="res://art/PlayerModel_Move_1.png" id="2_btjc2"]
+[ext_resource type="Texture2D" uid="uid://cybkjm0gh457f" path="res://art/PlayerModel_Right_2.png" id="3_nmiac"]
+[ext_resource type="Texture2D" uid="uid://dy3rwc738dvdm" path="res://art/PlayerModel_Move_2.png" id="3_pnkb1"]
+[ext_resource type="Texture2D" uid="uid://huetmdcqp6gc" path="res://art/PlayerModel_Idle_1.png" id="4_twkkj"]
+[ext_resource type="Texture2D" uid="uid://c47shk3x51jku" path="res://art/PlayerModel_Idle_2.png" id="5_3kj25"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2fsfs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5y4um")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nmiac")
+}],
+"loop": true,
+"name": &"right",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_btjc2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pnkb1")
+}],
+"loop": true,
+"name": &"up",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_twkkj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3kj25")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 20.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jpl20"]
+height = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ry6su"]
+radius = 41.0
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_nogvd")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_2fsfs")
+animation = &"walk"
+frame_progress = 0.192014
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_jpl20")
+
+[node name="GrazeBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ry6su")
+disabled = true
+
+[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]

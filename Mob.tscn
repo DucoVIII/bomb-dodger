@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwqwkvyj7og5b"]
+
+[ext_resource type="Script" path="res://Mob.gd" id="1_u6kv3"]
+[ext_resource type="Texture2D" uid="uid://cddu5xe02qocb" path="res://art/Bomb1Move_1.png" id="2_hxvvx"]
+[ext_resource type="Texture2D" uid="uid://cd5kruqtb8km" path="res://art/Bomb1Move_2.png" id="3_qf8v5"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4b1hi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hxvvx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qf8v5")
+}],
+"loop": true,
+"name": &"bomb",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m1u7d"]
+radius = 9.0
+height = 56.0
+
+[node name="Mob" type="RigidBody2D" groups=["mobs"]]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_u6kv3")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_4b1hi")
+animation = &"bomb"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_m1u7d")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
