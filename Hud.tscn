@@ -92,7 +92,17 @@ offset_right = 65.0
 offset_bottom = 143.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 12
-text = "Additional Score Gain Multiplier Value"
+text = "Graze"
+
+[node name="Credits" type="Label" parent="."]
+offset_left = 16.0
+offset_top = 640.0
+offset_right = 144.0
+offset_bottom = 711.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Programmeren: Duco
+Pixel art: Wouter
+https://godotengine.org/license/"
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

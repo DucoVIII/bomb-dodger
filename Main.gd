@@ -13,7 +13,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	$Grazebox.position = $Player.position
 
 
 func game_over():
@@ -22,6 +22,7 @@ func game_over():
 	$HUD.show_game_over()
 	$Music.stop()
 	$DeathSound.play()
+	$Grazebox/CollisionShape2D.set_deferred(&"disabled", true)
 
 func new_game():
 	score = 0
@@ -33,11 +34,14 @@ func new_game():
 	get_tree().call_group("mobs", "queue_free")
 	$Music.play()
 	$MobTimer.wait_time = 0.3
+	$Grazebox/CollisionShape2D.set_deferred(&"disabled", false)
+	$Grazebox.show()
 
 func _on_ScoreTimer_timeout():
-	score += 10 * 1 + (scoremultiplier / 10)
-	scoremultiplier += 1
+	score += 10 * 1 + (scoremultiplier / 5)
+	#scoremultiplier += 1
 	$HUD.update_score(score, scoremultiplier)
+
 
 func _on_StartTimer_timeout():
 	$MobTimer.start()
@@ -72,3 +76,15 @@ func _on_MobTimer_timeout():
 	elif $MobTimer.wait_time > 0.05:
 		$MobTimer.wait_time -= 0.0005
 	
+
+
+func _on_grazebox_body_entered(body):
+	$GrazeTimer.start()
+
+func _on_grazebox_body_exited(body):
+	$GrazeTimer.stop()
+
+
+func _on_graze_timer_timeout():
+	scoremultiplier += 1
+	$HUD.update_score(score, scoremultiplier)

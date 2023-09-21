@@ -3,6 +3,7 @@ extends Area2D
 signal hit
 signal graze
 
+
 @export var speed = 300 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
 
