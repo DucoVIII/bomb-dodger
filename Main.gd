@@ -74,7 +74,7 @@ func _on_MobTimer_timeout():
 	if $MobTimer.wait_time < 0.05:
 		$MobTimer.wait_time = 0.05
 	elif $MobTimer.wait_time > 0.05:
-		$MobTimer.wait_time -= 0.0005
+		$MobTimer.wait_time -= 0.001
 	
 
 
