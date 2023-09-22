@@ -9,7 +9,7 @@ func _ready():
 	# de speler sterft zodra het spel opent om een of andere reden dus we killen alle mobs meteen
 	# ik geloof niet dat dit de juiste manier is om dit te fixen maar het werkt
 	get_tree().call_group("mobs", "queue_free")
-
+	$Explosion.queue_free()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,6 +30,10 @@ func game_over():
 	$Music.stop()
 	$DeathSound.play()
 	$Grazebox/CollisionShape2D.set_deferred(&"disabled", true)
+	add_child($Explosion)
+	$Explosion.position = $Player.position
+
+
 
 func new_game():
 	score = 0
