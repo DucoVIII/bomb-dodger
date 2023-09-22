@@ -11,9 +11,16 @@ func _ready():
 	get_tree().call_group("mobs", "queue_free")
 
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	$Grazebox.position = $Player.position
+	
+	if Input.is_action_just_pressed("toggle_fullscreen"):
+		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
 
 func game_over():
@@ -38,8 +45,7 @@ func new_game():
 	$Grazebox.show()
 
 func _on_ScoreTimer_timeout():
-	score += 10 * 1 + (scoremultiplier / 5)
-	#scoremultiplier += 1
+	score += 100 * 1 + (scoremultiplier / 5)
 	$HUD.update_score(score, scoremultiplier)
 
 
@@ -87,4 +93,6 @@ func _on_grazebox_body_exited(body):
 
 func _on_graze_timer_timeout():
 	scoremultiplier += 1
+	score += 1 + (scoremultiplier / 10) * 1 + (scoremultiplier / 10)
 	$HUD.update_score(score, scoremultiplier)
+

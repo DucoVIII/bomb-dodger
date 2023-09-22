@@ -94,15 +94,69 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 12
 text = "Graze"
 
-[node name="Credits" type="Label" parent="."]
-offset_left = 16.0
-offset_top = 640.0
-offset_right = 144.0
-offset_bottom = 711.0
+[node name="HelpScreen" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -135.0
+offset_right = 192.0
+offset_bottom = 365.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Programmeren: Duco
+theme_override_fonts/font = ExtResource("1_df63j")
+theme_override_font_sizes/font_size = 18
+text = "Use the arrow keys to move.
+Hold spacebar to focus and move slower.
+
+Only the center part of your drone can be hit.
+An enemy passing over your sprite is called Grazing and this will gain you a lot of points!
+
+
+
+F11 toggle fullscreen 
+
+
+Programmeren: Duco
 Pixel art: Wouter
 https://godotengine.org/license/"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BackButton" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.85
+anchor_top = 0.1
+anchor_right = 0.85
+anchor_bottom = 0.1
+offset_left = -224.0
+offset_top = 400.0
+offset_right = -112.0
+offset_bottom = 433.0
+theme_override_fonts/font = ExtResource("1_df63j")
+text = "Back"
+
+[node name="HelpButton" type="Button" parent="."]
+offset_left = 160.0
+offset_top = 632.0
+offset_right = 320.0
+offset_bottom = 672.0
+theme_override_fonts/font = ExtResource("1_df63j")
+text = "Help / Info"
+
+[node name="QuitButton" type="Button" parent="."]
+offset_left = 368.0
+offset_top = 16.0
+offset_right = 464.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("1_df63j")
+text = "Quit"
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="HelpButton" to="." method="_on_help_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
